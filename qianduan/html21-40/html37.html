@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+
+<script>
+    const Home={
+        data(){
+            return {}
+        },
+        template:`<div>这是一个首页</div>`
+    };
+    const User={
+        data(){
+            return {
+                user_id:null,
+            }
+        },
+        template:`
+        <div>
+        这是用户{{ user_id }}
+        <button @click="clickhandler">跳转首页</button>
+</div>`,
+        created(){
+            this.user_id=this.$route.params.id;
+        },
+        methods:{
+            clickhandler(){
+                this.$router.push({
+                    name:"Home"
+                })
+            }
+        },
+        watch:{
+            '$route'(to,from){
+                let user_id=to.params.id;
+                this.user_id=user_id;
+            }
+        }
+    };
+    const router=new VueRouter({
+        routes:[
+            {
+                path:"/",
+                redirect:"Home"
+            },
+            {
+                path:"/home",
+                name:"Home",
+                component:Home,
+            },
+            {
+                path:"/user/:id",
+                name:"User",
+                component:User,
+            }
+        ]
+    });
+    let App={
+        data(){
+            return{}
+        },
+        template:`
+        <div>
+            <div class="header">
+                <router-link :to="{name:'Home'}">首页</router-link>
+                <router-link :to="{name:'User',params:{id:1}}">用户1</router-link>
+                <router-link :to="{name:'User',params:{id:2}}">用户2</router-link>
+            </div>
+            <router-view></router-view>
+        </div>`
+    };
+    new Vue({
+        el:"#app",
+        router,
+        data(){
+            return{}
+        },
+        template:`
+        <App />`,
+        components:{
+            App,
+        }
+
+    })
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

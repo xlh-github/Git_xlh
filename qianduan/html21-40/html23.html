@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg }}</p>
+    <App />
+</div>
+
+
+
+
+
+<script src="vue.js"></script>
+<script>
+    let  VBtn={
+        data(){
+            return{
+                message:' VBtn组件',
+            }
+        },
+        props:['id','msg2'],
+        template:`
+        <div class="vheader">
+        <p>{{ message }}</p>
+        <button>{{ id }}</button>
+        <h2>{{ msg2 }}</h2>
+
+
+
+        </div>
+        `
+
+    };
+
+
+    let  VHeader={
+        data(){
+            return{
+                message:' VHeader组件',
+            }
+        },
+        props:['msg','msg2','msg3','msg4','msg5'],
+        template:`
+        <div class="vheader">
+        <p>{{ message }}</p>
+        <h1>{{ msg }}</h1>
+        <h2>{{ msg2 }}</h2>
+        <h3>{{ msg3 }}</h3>
+        <h4>{{ msg4.id }}</h4>
+        <h4>{{ msg4.name }}</h4>
+        <h5>{{ msg5 }}</h5>
+
+        <VBtn :id="msg4.id" :msg2="msg2"></VBtn>
+        </div>
+        `,
+        components:{
+            VBtn
+        },
+
+    };
+
+
+    let App={
+        data(){
+            return{
+                text:"string",
+                text2:111,
+                text3:true,
+                text4:{
+                    id:1,
+                    name:"jj"
+                },
+                li:[1,2,3],
+            }
+        },
+        template:`
+        <div>
+        <p>{{ text }}</p>
+
+        <div id="app2">
+        <VHeader :msg="text" :msg2="text2" :msg3="text3" :msg4="text4" :msg5="li"></VHeader>
+        </div>
+        </div>
+        `,
+
+
+
+        components:{
+            VHeader
+        },
+    };
+
+
+    let vm=new Vue({
+        el:"#app",
+        data(){
+            return {
+                msg:"vue根组件",
+            }
+        },
+        components:{
+            App
+        }
+    })
+</script>
+</body>
+</html>

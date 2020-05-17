@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <App/>
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+    Vue.component('VBtn',{
+       data(){
+           return{
+
+           }
+       } ,
+
+       template:`
+            <button @click="clickHandler">
+               {{ id }}
+            </button>
+       `,
+        props:['id'],
+        methods:{
+           clickHandler(){
+               this.id++;
+               this.$emit('vheaderClick',this.id);
+           }
+        }
+    });
+    let Vheader = {
+        data() {
+            return {
+                message:'chao'
+            }
+        },
+
+
+        props:['msg3'],
+
+        template: `
+            <div class="c1">
+
+                <h3>{{ msg3.id }}</h3>
+
+                <VBtn :id="msg3.id" @vheaderClick="vheaderClickHandler"></VBtn>
+            </div>
+        `,
+
+        methods:{
+            vheaderClickHandler(val){
+                // alert(1);
+                alert(val);
+                this.$emit('fatherHandler',val);
+
+            }
+        },
+    };
+    let App = {
+        data() {
+            return {
+
+                post:{  //自定义对象
+                    id:1,
+                    name:'jj'
+                },
+
+            }
+        },
+
+
+        methods:{
+          appFatherHandler(val){
+
+              this.post.id=val;
+          }
+        },
+        template:
+            `
+                <div id="dd1">
+                    <Vheader :msg3="post"  @fatherHandler="appFatherHandler"></Vheader>
+                </div>
+            `,
+        components:{
+            Vheader,
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                msg: 'chao'
+            }
+        },
+        components: {
+            App
+        }
+    })
+</script>
+</body>
+</html>

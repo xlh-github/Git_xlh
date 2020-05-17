@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id ="app">
+    <App />
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let bus=new Vue();
+    Vue.component('Test2',{
+        data(){
+          return{
+              msg:"TEST2222子组件"
+          }
+      } ,
+        template:`
+       <div class="xxxxxx">
+       <h1>{{ msg }}</h1>
+       </div>  `,
+
+        created(){
+            bus.$on('Testdata',(val)=>{
+                this.msg=val
+            })
+        }
+    }
+    );
+
+
+
+    Vue.component('Test',{
+        data(){
+          return{
+              msg:"TEST111111111子组件"
+          }
+      } ,
+        template:`
+        <button @click="clickhandler">
+        {{ msg }}
+         </button>`,
+
+        methods:{
+            clickhandler(){
+                bus.$emit('Testdata',this.msg)
+            }
+        }
+    });
+    let VHeader={
+          data(){
+          return{}
+      } ,
+       template:`
+       <div class="xxx">
+       <Test />
+       <Test2 />
+       </div>  `,
+
+    };
+
+   let App={
+      data(){
+          return{}
+      } ,
+       template:`
+       <div>
+       <VHeader />
+       </div>  `,
+       components:{
+          VHeader
+       }
+   } ;
+
+    let vm=new Vue({
+        el:"#app",
+        data(){
+            return{}
+        },
+        components:{
+            App
+        }
+    })
+</script>
+
+
+</body>
+</html>

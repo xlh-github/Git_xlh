@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var a = "aa";
+    let b = `${a}bb`;
+    console.log(b);
+
+    let add1 = function (x) {
+        return x
+    };
+    console.log(add1(1));
+    let add2 = (x) => x;
+    console.log(add2(2))
+
+
+    var person={
+        name:"name1",
+        f1:function(){
+            console.log(this.name)
+        }
+    };
+    person.f1();
+    add=function(){
+        console.log(22222222)
+    };
+    class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        showname(){
+            console.log(this.name);
+        }
+    }
+
+</script>
+</body>
+</html>

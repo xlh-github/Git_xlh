@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <App />
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let Test = {
+        data() {
+            return {
+                msg: "mymsg",
+                count: 0,
+                timer: null,
+            }
+        },
+        template: `
+        <div id="test">
+                <div id="box">{{ msg }}</div>
+                <div >{{ count }}</div>
+                <button @click="change">修改</button>
+            </div>`,
+        methods: {
+            change() {
+                this.msg = "woshishei";
+                document.querySelector("#box").style.color = "blue";
+
+            }
+        },
+        beforeCreate() {
+            console.log("beforecreate", this.msg)
+        },
+        created() {
+            this.timer = setInterval(() => {
+                this.count++
+            }, 1000);
+            console.log("after", this.msg)
+        },
+        activated() {
+            console.log("激活了");
+        },
+        deactivated() {
+            console.log("停用了");
+        }
+    };
+    let App = {
+        data() {
+            return {
+                isshow: true,
+            }
+        },
+        template: `
+        <div>
+        <keep-alive>
+        <Test v-if="isshow" />
+        </keep-alive>
+        <button @click="clickhandler">修改test组件</button>
+        </div> `,
+
+        methods: {
+            clickhandler() {
+                this.isshow = !this.isshow;
+            }
+        },
+        components: {
+            Test,
+        }
+    };
+    new Vue({
+        el:"#app",
+        data(){
+            return{}
+        },
+        created(){
+            console.log(111)
+        },
+        components:{
+            App,
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

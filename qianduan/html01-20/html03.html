@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            background-color: blue;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul v-if="data.status==='ok'">
+        <li v-for="(item,index) in data.info" v-bind:key="item.id" v-on:click="hanlerclick(index)" :class="{active:index===currentindex}">
+            {{ item }}--{{ index }}
+        </li>
+    </ul>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+               data:{
+                   status:'ok',
+                   info:[
+                       "aa",
+                       "bb",
+                       "cc"
+                   ],
+
+               },
+                currentindex:0
+            }
+        },
+        methods:{
+            hanlerclick(index){
+                console.log(this.currentindex)
+                console.log(index)
+                this.currentindex=index;
+                console.log(this.currentindex)
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

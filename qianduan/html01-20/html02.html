@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .box {
+            height: 200px;
+            width: 200px;
+            background-color: red;
+        }
+
+        .active {
+            background-color: green;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div>{{ msg }}</div>
+    <div v-text="msg2"></div>
+    <div v-html="msg2"></div>
+    <img v-bind:src="imgsrc" v-bind:alt="imgalt">
+    <button v-on:click="handlerclick">点击</button>
+    <div class="box hidden" v-show="isshow"></div>
+    <div v-bind:class="{active:isactive}" class="box" @mouseenter="enter" @mouseleave="leave"></div>
+</div>
+
+<script src="jquery-3.3.1.js"></script>
+<script src="vue.js"></script>
+
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "哈哈哈啊",
+                msg2: "<h1>啦啦啦啦</h1>",
+                isshow: true,
+                imgsrc: 'images/1.jpg',
+                imgale: "美女",
+                isactive: true,
+            }
+        },
+        methods: {
+            handlerclick() {
+                console.log(this.isshow);
+                this.isshow = !this.isshow
+            },
+            enter(){
+                this.isactive=false;
+            },
+            leave(){
+                this.isactive=true;
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>

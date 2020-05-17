@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{ data }} ---{{ info }}
+</div>
+
+<script src="vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data(){
+            return {
+                data:"haha",
+                info:"myinfo",
+            }
+        },
+        beforeCreate(){
+            console.log("创建之前================");
+            console.log(this.data);
+            console.log(this.$el);
+        },
+        created(){
+            console.log("创建完成==================");
+            console.log(this.info);
+            console.log(this.$el);
+        },
+        beforeMount(){
+            console.log("挂载之前===============");
+            console.log(this.data);
+            console.log(this.$el);
+        },
+        mounted(){
+            console.log("挂载========================");
+            console.log(this.data);
+            console.log(this.$el)
+        },
+        beforeUpdate(){
+            console.log("更新之前===============");
+            console.log(this.data)
+        },
+        updated(){
+            console.log("更新之后============");
+        },
+        beforeDestroy(){
+            console.log("销毁之前=============");
+            console.log(this.data);
+            console.log(this.$el);
+        },
+        destroyed(){
+            console.log("销毁之后==========");
+            console.log(this.data);
+            console.log(this.$el);
+        }
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

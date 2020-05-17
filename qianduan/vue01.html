@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>问卷调查</h1>
+    <form action="" method="post">
+        <input v-model="checkbox" value="1">香蕉
+        <input v-model="checkbox" value="2">苹果
+        <input v-model="checkbox" value="3">橘子
+        <input v-model="checkbox"  @click="qita" value="4">其他
+        <div v-html="htmlstr" v-show="test"></div>
+    </form>
+    已选择：<div >{{ checkbox }}</div>
+</div>
+
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            htmlstr:'<textarea></textarea>',
+            test:false ,
+            myselect:[]
+        },
+        methods:{
+            qita:function () {
+                this.test = !this.test  //当一点击其他的时候让显示
+            }
+        },
+        // created(){
+        //      this.myselect=
+        // }
+
+    });
+
+</script>
+
+</body>
+</html>

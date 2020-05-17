@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <p>{{ msg }}</p>
+    <p>{{ age }}</p>
+    <p>{{ mymsg }}</p>
+    <button @click="clickhandler">点击</button>
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data(){
+            return{
+                msg:"xiaoxiao",
+                age:12,
+            }
+        },
+        methods:{
+            clickhandler(){
+                this.msg="lala";
+                this.age=11
+            }
+        },
+        created(){
+
+        },
+        computed:{
+            mymsg:function(){
+                return `我的名字叫做${this.msg},年龄是${this.age}`;
+            }
+
+        },
+        watch:{
+            'msg':function(value){
+                console.log(value);
+                if (value === 'lala'){
+                    this.msg="nblala";
+                }
+            },
+            'age':function(value){
+                console.log(value);
+                if( value === 11){
+                    this.age=18;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

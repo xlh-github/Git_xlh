@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="app">
+    <App />
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    //第二步：做一个全局的vue对象，这个对象来调用$on和$emit方法，注意：这个vue对象和下面的那个vue对象不是一个对象昂，两个的内存地址是不同的，你现在相当于实例化了两个vue对象，但是这个vue对象只是单纯的作为平行组件传值的一个公交车
+    let bus = new Vue();
+
+
+    //下面的组件，我们通过平行组件传值的方式来搞,下面写了两个全局组件来演示平行组件Test和Test2，我想将Test组件中的数据传递给Test2，Test-->Test2,那么Test2中要通过$on来声明事件$on('事件的名字',function(val){}),Test组件中要触发事件$emit('Test组件中声明的事件'，值)，前提是，这两个方法$on和$emit必须绑定在同一个实例化对象中，一般称这个实例化对象为bus对象，公交车对象
+    Vue.component('Test2',{
+       data(){
+           return{
+               msg:'Test2数据',
+               text:'',
+           }
+       } ,
+        //使用一下Test组件传递过来的数据
+        template:`
+           <h1>{{ text }}</h1>
+        `,
+        methods:{
+           clickHandler(){
+
+           }
+        },
+        //可以在created方法中接收Test组件传过来的数据
+        created(){
+           //声明事件，现在并没有调用，只有下面的那个Test组件里面的按钮点击事件触发才会调用这个事件
+           // this.$on('TestData',function (val) { 通过this绑定是不行的，两个组件之间没有关系
+           // bus.$on('TestData',function (val) {
+           //      alert(val);
+           //      this.text = val; //现在想给Test2组件里面的text数据属性传值，直接这样写是不行的因为this现在指向的是bus那个vue对象，所以this的指向需要变化，所以我们需要用箭头函数来改变this的指向
+           // })
+            bus.$on('TestData', (val) => {
+                alert(val);
+                this.text = val; //this现在只的是bus那个vue对象，所以this的指向需要变化，所以我们需要用箭头函数来改变this的指向
+           })
+        }
+    });
+    Vue.component('Test',{
+       data(){
+           return{
+               msg:'我是子组件Test的数据',
+
+           }
+       } ,
+        props:['txt'],//下面<Test txt="chao"></Test>这种写法的静态传值
+        //通过点击这个按钮，把子组件的数据传递给下面的Vheader组件
+        template:`
+            <!--<button @click="clickHandler">{{ txt }}</button>-->
+            <button @click="clickHandler">{{ txt }}</button>
+        `,
+        methods:{
+           clickHandler(){
+                // this.$emit('TestData',this.msg);通过this绑定是不行的，两个组件之间没有关系
+                bus.$emit('TestData',this.msg)
+           }
+        },
+
+    });
+
+    let Vheader = {
+        data(){
+            return{
+                txt:'Jaden', //动态的给下面的Test组件传值，注意<Test txt="chao"></Test>txt前面没有:的是静态传值的方式
+            }
+        },
+        template:`
+            <div class="header">
+                <!--<Test txt="chao"></Test>-->
+                <Test :txt="txt"></Test>
+
+                <!--<Test></Test>-->
+                <Test2></Test2>
+
+            </div>
+        `
+    };
+
+    let App={
+        data(){
+            return{
+
+            }
+        },
+        template:`
+            <div class="xxx">
+                <Vheader></Vheader>
+
+            </div>
+
+        `,
+        components:{
+            Vheader
+        }
+    };
+    new Vue({
+        el:'.app',
+        data(){
+            return{
+
+            }
+        },
+        //挂载
+        components:{
+            App
+        }
+
+    })
+
+
+</script>
+
+</body>
+</html>

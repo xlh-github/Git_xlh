@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <img :src="imgs[currentIndex].imgSrc" alt="" @>
+    <br>
+    <button @click="nexthandler">next</button>
+</div>
+
+
+<script src="vue.js"></script>
+
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                imgs:[
+                    {id:1,imgSrc:'./images/1.jpg'},
+                    {id:2,imgSrc:'./images/2.jpg'},
+                    {id:3,imgSrc:'./images/3.jpg'},
+
+                ],
+                currentIndex:0,  //默认选中第一张
+
+            }
+        },
+        created(){
+            setInterval(()=>{
+                 this.currentIndex++;
+                if (this.currentIndex===3){
+                      this.currentIndex=0;
+                }
+            },200)
+
+        },
+        methods:{
+            nexthandler(){
+                this.currentIndex++;
+                if (this.currentIndex===3){
+                      this.currentIndex=0;
+                }
+
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

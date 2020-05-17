@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <div v-if="data.status=='ok'">
+        <ul>
+            <li v-for="(item,index) in data.person">
+                {{ item }}--{{ index }}
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<script src="vue.js"></script>
+
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                data: {
+                    status: "ok",
+                    person: {
+                        name: "lalal",
+                        age: 12,
+                        hobby: "lulu",
+                    }
+                }
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>

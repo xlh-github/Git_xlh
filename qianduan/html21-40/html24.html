@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <App />
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+    // let  VBtn={
+    Vue.component('VBtn',{
+        data(){
+            return{
+            }
+        },
+        props:['id'],
+        template:`
+        <div class="xxx">
+
+        <button @click="clickhandler">{{ id }}</button>
+        </div>
+        `,
+        methods:{
+            clickhandler(){
+                this.id++;
+                this.$emit("vheaderClick",this.id)
+            }
+        }
+    });
+
+
+    let  VHeader={
+        data(){
+            return{
+            }
+        },
+        props:['msg4'],
+        template:`
+        <div class="aaaa">
+
+        <h4>{{ msg4.id }}</h4>
+        <h4>{{ msg4.id }}</h4>
+        <h4>{{ msg4.id }}</h4>
+
+        <VBtn :id="msg4.id" @vheaderClick="vheaderClickHandler" ></VBtn>
+        </div>
+        `,
+        // components:{
+        //     VBtn
+        // },
+        methods:{
+            vheaderClickHandler(val){
+                alert(val);
+                this.$emit("fatherClick",val)
+            }
+        },
+
+    };
+
+
+    let App={
+        data(){
+            return{
+                text4:{
+                    id:1,
+                    name:"jj"
+                },
+            }
+        },
+        template:`
+        <div>
+
+        <VHeader :msg4="text4"  @fatherClick="appFatherHandler"></VHeader>
+
+        </div>
+        `,
+
+        components:{
+            VHeader
+        },
+        methods:{
+          appFatherHandler(){
+              this.text4.id=val;
+          }
+        },
+    };
+
+
+    let vm=new Vue({
+        el:"#app",
+        data(){
+            return {
+                msg:"vue",
+            }
+        },
+        components:{
+            App
+        }
+    })
+</script>
+</body>
+</html>

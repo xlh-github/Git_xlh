@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+
+    Vue.component('VBtn', {
+        data() {
+            return {
+                btn: "按钮",
+            }
+        },
+        template: `
+        <div>
+    <button><slot>{{ btn }} </slot></button>
+    </div>
+        `,
+    });
+
+    let App = {
+        data() {
+            return {
+                msg: "App组件"
+            }
+        },
+        template: `
+        <div>
+    <h2>{{ msg }}</h2>
+    <VBtn>APP按钮</VBtn>
+
+        </div>
+        `,
+        components:{
+
+        }
+    };
+
+
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "Vue组件"
+            }
+        },
+        template: `
+
+            <div>
+            <VBtn>VUE按钮</VBtn>
+                <h1>{{ msg }}</h1>
+                <App />
+
+            </div>
+        `,
+        methods: {},
+        watch: {},
+        computed: {},
+        created() {
+        },
+        components: {
+            App
+        },
+
+    })
+
+</script>
+
+
+</body>
+</html>

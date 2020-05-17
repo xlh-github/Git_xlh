@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+
+<script>
+    const Home={
+        data(){
+            return{}
+        },
+        template:`<div>我是首页</div>`
+    };
+    const Course={
+        data(){
+            return{}
+        },
+        template:`<div>我是免费课程</div>`
+    };
+    const router = new VueRouter({
+        // mode:'history',
+        routes: [
+            {
+                path: "/",
+                redirect: "/home",
+            },
+            {
+                path: "/home",
+                component: Home,
+            },
+            {
+                path: "/course",
+                component: Course,
+            }
+
+        ]
+    });
+    let App = {
+        data() {
+            return {}
+        },
+        // template: `
+        // <div>
+        // <div class="header">
+        //     <h3>哈哈哈</h3>
+        //     <router-link to="/home">首页</router-link>
+        //     <router-link to="/course">免费课程</router-link>
+        // </div>
+        // <router-view></router-view>
+        // </div>`
+        template:
+            `
+            <div>
+                <div class="header">
+                    <router-link to="/home">首页1</router-link>
+                    <router-link to="/course">免费课程1</router-link>
+                </div>
+                <router-view></router-view>
+            </div>
+            `,
+
+    };
+    new Vue({
+        el:"#app",
+        router,
+        data(){
+            return{}
+        },
+        template:`
+        <App />`,
+        components:{
+            App,
+        }
+    })
+</script>
+
+
+</body>
+</html>

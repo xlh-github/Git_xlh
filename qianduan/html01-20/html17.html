@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <input type="text" v-model="msg">
+    <p>{{ msg }}</p>
+    <textarea name="" id="" cols="30" rows="10" v-model="msg" placeholder="内容"></textarea>
+    <br>
+    <input type="checkbox" id="checkboxa" v-model="checked" value="xx">
+    <label for="checkboxa">{{ checked}}</label>
+
+    <br>
+
+    <div id="v3">
+        <input type="checkbox" id="aa" v-model="checkname" value="ccaaa">
+        <label for="aa">aaa</label>
+
+        <input type="checkbox" id="bb" v-model="checkname" value="ccbbb">
+        <label for="bb">bbb</label>
+        <input type="checkbox" id="cc" v-model="checkname" value="ccccc">
+        <label for="cc">ccc</label>
+    </div>
+    <br>
+    <span>{{ checkname}}</span>
+    <br>
+
+    <div id="v4">
+        <input type="radio" id="one" value="one" v-model="picked">
+        <label for="one"></label>
+        <br>
+        <input type="radio" id="two" value="two" v-model="picked">
+        <label for="two"></label>
+        <br>
+        <input type="radio" id="three" value="three" v-model="picked">
+        <label for="three"></label>
+        <br>
+        <span> {{ picked }}</span>
+    </div>
+
+
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "msg",
+                checked: false,
+                checkname: [],
+                picked:'',
+            }
+        },
+        methods: {},
+        computed: {},
+        watch: {},
+        created() {
+
+        }
+    })
+
+
+</script>
+
+
+</body>
+</html>

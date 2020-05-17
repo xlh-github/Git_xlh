@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input  v-model.number="msg" type="number">
+    <br>
+    <span>{{ msg }}</span>
+    <br>
+    <!--<textarea name="" id="" cols="30" rows="10" v-model="msg" placeholder="内容"></textarea>-->
+    <!--<br>-->
+
+    <input type="checkbox" id="onechoose" v-model="checked">
+    <label for="onechoose">{{ checked }}</label>
+    <br>
+
+    <div>
+
+        <input type="checkbox" id="1" v-model="checkname" value="1">
+        <label for="1">1</label>
+        <input type="checkbox" id="2" v-model="checkname" value="2">
+        <label for="2">2</label>
+        <p>{{ checkname }}</p>
+    </div>
+    <div>
+        <input type="radio" id="1" value="1" v-model="picked">
+        <label for="1">1</label>
+          <input type="radio" id="2" value="2" v-model="picked">
+        <label for="1">2</label>
+        <br>
+        <p>{{ picked }}</p>
+    </div>
+    <div>
+        <select name="" v-model="myselect" style="width: 80px;">
+            <option value="">请选择</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <p>{{ myselect }}</p>
+    </div>
+    <div>
+        <select name="" v-model="myselect2" multiple style="width: 80px;">
+            <option value="">请选择</option>
+            <option value="A2">A</option>
+            <option value="B2">B</option>
+            <option value="C2">C</option>
+        </select>
+        <p>{{ myselect2 }}</p>
+    </div>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "",
+                checked: true,
+                checkname: [],
+                picked:'',
+                myselect:'',
+                myselect2:[],
+            }
+        },
+        created() {
+        },
+        computed: {},
+        watch: {},
+        methods: {}
+
+    })
+</script>
+</body>
+</html>

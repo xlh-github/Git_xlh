@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .active {
+            background-color: dodgerblue;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>ajax 数据</h1>
+    <div>
+        <span @click="handlerclick(index)"   v-for="(course,index) in categorylist" :key="course.id" :class="{ active:index==currentindex }">
+            {{ course.name }}
+            <!--{{ course }}-->
+        </span>
+    </div>
+</div>
+
+<script src="jquery-3.3.1.js"></script>
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                categorylist: [],
+                currentindex:0,
+            }
+        },
+        created() {
+            $.ajax({
+                url: 'https://www.luffycity.com/api/v1/course_sub/category/list/',
+                type: 'get',
+                success: (data) => {
+                    if (data.error_no === 0) {
+                        let alldata = data.data;
+                        console.log(alldata);
+                        this.categorylist = alldata;
+                        this.categorylist.unshift({"id":0,"name":'全部',"category":0});
+                    }
+                }
+
+
+            })
+        },
+        methods: {
+            handlerclick(index){
+                this.currentindex=index;
+            }
+
+
+        }
+
+
+    })
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+<script>
+    const User={
+        data(){
+            return {
+                user_id:null,
+            }
+        },
+        template:`
+        <div>我是用户{{ user_id }}</div> `,
+
+        created(){
+            console.log(this.$route.params.id);
+            this.user_id=this.$route.params.id;
+        },
+        watch:{
+            '$route'(to,from){
+                console.log(to);
+                console.log(from);
+                let user_id=to.params.id;
+                this.user_id=user_id;
+
+            }
+        }
+    };
+    const router=new VueRouter({
+        routes:[
+            {
+                path:"/user/:id",
+                name:"User",
+                component:User,
+            }
+        ]
+    });
+    let App={
+        data(){
+            return{}
+        },
+        template:`
+        <div>
+       <div class="header">
+       <router-link :to="{name:'User',params:{id:1}}">用户1</router-link>
+       <router-link :to="{name:'User',params:{id:2}}">用户2</router-link>
+        </div>
+         <router-view></router-view>
+        </div>
+
+        `
+    };
+    new Vue({
+        el:"#app",
+        router,
+        data(){
+            return{}
+        },
+        template:`<App />`,
+        components:{
+            App,
+        }
+    })
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

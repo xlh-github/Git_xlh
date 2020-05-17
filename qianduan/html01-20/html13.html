@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="music">
+
+    <ul>
+        <audio :src="musicdata[currentindex].songSrc" controls autoplay   @ended="nexthandler"></audio>
+
+
+        <li v-for="(item ,index) in musicdata" :key="item.id" @click="handlerclick(index)"
+            :class="{ active: index===currentindex }" >
+            {{ item.name}}--{{ item.author}}
+            <hr>
+        </li>
+
+    </ul>
+    <br>
+    <button @click="nexthandler">next</button>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    var allMusicData = [
+        {
+            id: 1,
+            name: '于荣光 - 少林英雄',
+            author: '于荣光',
+            songSrc: './static/于荣光 - 少林英雄.mp3'
+        },
+        {
+            id: 2,
+            name: 'Joel Adams - Please Dont Go',
+            author: 'Joel Adams',
+            songSrc: './static/Joel Adams - Please Dont Go.mp3'
+        },
+        {
+            id: 3,
+            name: 'MKJ - Time',
+            author: 'MKJ',
+            songSrc: './static/MKJ - Time.mp3'
+        },
+        {
+            id: 4,
+            name: 'Russ - Psycho (Pt. 2)',
+            author: 'Russ',
+            songSrc: './static/Russ - Psycho (Pt. 2).mp3'
+        }
+    ];
+    let vm = new Vue({
+        el: "#music",
+        data() {
+            return {
+                musicdata: [],
+                currentindex: 0,
+
+            }
+        },
+        created() {
+            this.musicdata = allMusicData;
+        },
+        methods: {
+            handlerclick(index) {
+                this.currentindex = index;
+            },
+            nexthandler() {
+                this.currentindex++;
+                if (this.currentindex === this.musicdata.length) {
+                    this.currentindex = 0;
+                }
+            },
+
+
+        }
+    })
+</script>
+</body>
+</html>

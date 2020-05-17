@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h5> {{msg}}</h5>
+    <App/>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let Header = {
+        data() {
+            return {
+                text: "我是Header1组件"
+            }
+        },
+        template:
+            `
+        <div id="3"><h3>{{ text }}</h3></div>
+
+        `
+    };
+
+
+    let App = {
+        data() {
+            return {
+                text: "我是APP组件"
+            }
+        },
+        template:
+            `
+    <div>
+        <div id="2"><h2>{{ text }}</h2></div>
+        <Header />
+        </div>
+        `,
+         components: {
+            Header
+        }
+    };
+
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+                msg: "haha",
+            }
+        },
+        components: {
+            App
+        }
+
+    })
+</script>
+
+</body>
+</html>

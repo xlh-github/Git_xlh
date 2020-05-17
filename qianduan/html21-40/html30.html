@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <App />
+</div>
+
+<script src="vue.js"></script>
+<script src="moment.js"></script>
+<script src="jquery-3.3.1.js"></script>
+
+<script>
+    let App={
+        data(){
+            return {
+                msg:"hello world",
+                time:new Date(),
+            }
+        },
+        template:`
+        <div>
+        我是APP 组件
+        {{ msg | myreverse }}
+        <h2>{{ time | mytime('YYYY-MM-DD') }}</h2>
+           </div>`,
+
+        filters:{
+            myreverse:function(val){
+                return val.split('').reverse().join('')
+            },
+            mytime(val,formstr){
+                return moment(val).format(formstr)
+            }
+        }
+    };
+
+    let vm=new Vue({
+        el:"#app",
+        data(){
+            return{}
+        },
+        components:{
+            App,
+        }
+    })
+</script>
+
+
+
+</body>
+</html>
